@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "26131274441",
+    "firebase_url": "https://foodorder-118a7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "foodorder-118a7",
+    "storage_bucket": "foodorder-118a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:26131274441:android:4b3bf35ef169661811cb18",
+        "android_client_info": {
+          "package_name": "com.heang.foodDelivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "26131274441-gm0ubsu586b9coun1ukdt9npmkp0ugik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.heang.foodDelivery",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "26131274441-721d3obfd1b9sgvs9rsef5of7iv4eeog.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbkHxZUHy2iErP_kHZv1lHz-l0i6E7EGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "26131274441-721d3obfd1b9sgvs9rsef5of7iv4eeog.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
