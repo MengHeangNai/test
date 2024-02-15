@@ -24,7 +24,9 @@ const CartScreen = (props: Props) => {
                 <Text>Size: {item.size}</Text>
                 <Text>Quantity: {item.quantity}</Text>
             </View>
-            <View>
+            <View style={{
+                marginRight: 10,
+            }}>
                 <TouchableOpacity onPress={() => props.onDelete(item.id)}>
                     <AntDesgin name="delete" size={20} color="black" />
                 </TouchableOpacity>

@@ -38,23 +38,21 @@ export const styles = StyleSheet.create({
         textAlign: 'center'
     },
     messageContainer: {
-        padding: 15,
+        padding: 10,
         margin: 10,
         borderRadius: 5,
     },
     messageText: {
         color: 'black',
-        textAlign: 'left'
+        textAlign: 'left',
+        paddingBottom: 20,
     },
     inputContainer: {
+        width: '100%',
         position: 'absolute',
         bottom: 0,
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
         backgroundColor: 'white',
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        padding: 10,
     },
     chat: {
         width: 20,
@@ -63,12 +61,48 @@ export const styles = StyleSheet.create({
 
     },
     date: {
-        right: 0,
-        bottom: 0,
-        position: 'absolute',
-        alignSelf: 'flex-end',
-        color: modules.WHITE,
+        // right: 0,
+        // bottom: 0,
+        // position: 'absolute',
         fontSize: modules.SMALL,
-        margin: modules.BODY_HORIZONTAL_12 / 2,
+    },
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    },
+    modalView: {
+        backgroundColor: 'white',
+        borderRadius: 20,
+        padding: 35,
+        alignItems: 'center',
+        elevation: 5,
+    },
+    modalText: {
+        marginBottom: 15,
+        textAlign: 'center',
+        fontSize: 20,
+    },
+    closeButton: {
+        marginTop: 15,
+        textAlign: 'center',
+        fontSize: 18,
+        color: 'blue',
+    },
+    oldMessage: {
+        color: 'black',
+        textAlign: 'left',
+    },
+    oldMessageContainer: {
+        backgroundColor: 'white',
+        padding: 10,
+        borderRadius: 5,
+
     },
 })

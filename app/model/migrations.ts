@@ -6,7 +6,7 @@ import {
 export default schemaMigrations({
   migrations: [
     {
-      toVersion: 15,
+      toVersion: 50,
       steps: [
         addColumns({
           table: 'carts',
@@ -26,6 +26,7 @@ export default schemaMigrations({
             { name: 'message', type: 'string' },
             { name: 'isReceiver', type: 'boolean' },
             { name: 'date', type: 'string' },
+            { name: 'isEdited', type: 'boolean' },
           ],
         })
       ],

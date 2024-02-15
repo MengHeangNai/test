@@ -7,4 +7,5 @@ export default class Message extends Model {
     @field('message') message: any;
     @field('isReceiver') isReceiver: boolean;
     @field('date') date: any;
+    @field('isEdited') isEdited: boolean;
 }

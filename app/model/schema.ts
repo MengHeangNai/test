@@ -1,7 +1,7 @@
 import { appSchema, tableSchema } from '@nozbe/watermelondb/Schema';
 
 export default appSchema({
-  version: 15, // Increment the version number
+  version: 50, // Increment the version number
   tables: [
     tableSchema({
       name: 'carts',
@@ -21,6 +21,7 @@ export default appSchema({
         { name: 'message', type: 'string' },
         { name: 'isReceiver', type: 'boolean' },
         { name: 'date', type: 'string' },
+        { name: 'isEdited', type: 'boolean' },
       ],
     }),
   ],

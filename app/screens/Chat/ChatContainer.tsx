@@ -42,6 +42,23 @@ const ChatContainer = (props: Props) => {
         })
     }
 
+    const _onEdit = async (id: any, newText: any) => {
+        await database.write(async () => {
+            const messages = await database.get('messages').find(id)
+            messages.update((message: any) => {
+                message.message = newText
+                message.isEdited = true
+                message.date = new Date().toLocaleTimeString()
+            })
+        })
+    }
+
+
+    // console.log(
+    //     database.adapter.schema.tables
+    // )
+
+
     return <ChatScreen
         onChangeText={onChangeText}
         text={text}
@@ -49,6 +66,7 @@ const ChatContainer = (props: Props) => {
         setMessages={setMessages}
         onSubmit={_onSubmit}
         onDestroy={_onDestroy}
+        onEdit={_onEdit}
     />
 }
 
