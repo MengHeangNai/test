@@ -3,6 +3,8 @@ import BlogPostCard from "../components/general/BlogPostCard";
 import { prisma } from "./utils/db";
 import { BlogPostsGrid } from "../components/general/BlogPostsGrid";
 
+export const revalidate = 60;
+
 const getData = async () => {
   await new Promise((resolve) => setTimeout(resolve, 2000));
   const data = await prisma.blogPost.findMany({
