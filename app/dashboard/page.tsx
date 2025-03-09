@@ -2,7 +2,7 @@ import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
 import { prisma } from "../utils/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import BlogPostCard from "../components/general/BlogPostCard";
+import BlogPostCard from "../../components/general/BlogPostCard";
 
 async function getData(userId: any) {
   await new Promise((resolve) => setTimeout(resolve, 2000));

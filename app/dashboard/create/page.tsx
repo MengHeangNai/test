@@ -1,5 +1,5 @@
 import handleSubmit from "@/app/action";
-import SubmitButton from "@/app/components/general/SubmitButton";
+import SubmitButton from "@/components/general/SubmitButton";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
