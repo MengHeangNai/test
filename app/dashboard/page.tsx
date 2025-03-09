@@ -20,7 +20,7 @@ async function getData(userId: any) {
 
 export default async function Dashboard() {
 
-  const { getUser } = getKindeServerSession();
+  const { getUser, getIdToken, getAccessToken } = getKindeServerSession();
   const user = await getUser();
   const data = await getData(user?.id);
 

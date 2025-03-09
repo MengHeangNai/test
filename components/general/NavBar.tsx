@@ -26,6 +26,9 @@ function NavBar() {
                 <div className='hidden sm:flex items-center gap-6'>
                     <Link href={'/dashboard'} className='text-sm font-medium hover:text-blue-500 transition-colors'>Dashboard</Link>
                 </div>
+                <div className='hidden sm:flex items-center gap-6'>
+                    <Link href={'/todo'} className='text-sm font-medium hover:text-blue-500 transition-colors'>Todos</Link>
+                </div>
             </div>
             {
                 user ? (
