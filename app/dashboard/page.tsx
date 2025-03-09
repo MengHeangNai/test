@@ -22,7 +22,7 @@ export default async function Dashboard() {
 
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  const data = await getData(user.id);
+  const data = await getData(user?.id);
 
   return (
     <div>
@@ -32,7 +32,7 @@ export default async function Dashboard() {
       </div>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
         {data.map((post: any) => (
-          <BlogPostCard data={post} key={post.id} />
+          <BlogPostCard data={post} key={post?.id} />
         ))}
       </div>
     </div>
