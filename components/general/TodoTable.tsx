@@ -36,7 +36,7 @@ export default function TodoTable({ userId }: Props) {
     const [isStatusDialogOpen, setIsStatusDialogOpen] = useState(false);
 
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchTodos(userId, status);
-
+    console.log('data :>> ', data);
     const loading = useMemo(() => isLoading || isFetchingNextPage, [isLoading, isFetchingNextPage]);
     const todos = useMemo(() => data?.pages.flatMap((page) => page.todos) || [], [data]);
 

@@ -19,6 +19,7 @@ async function getData(userId: any) {
 
 
 export default async function Dashboard() {
+  'use cache';
 
   const { getUser, getIdToken, getAccessToken } = getKindeServerSession();
   const user = await getUser();

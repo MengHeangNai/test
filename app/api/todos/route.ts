@@ -1,4 +1,3 @@
-// app/api/todos/route.ts
 import { prisma } from '@/app/utils/db';
 import { NextRequest } from 'next/server';
 

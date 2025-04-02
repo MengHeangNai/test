@@ -24,6 +24,8 @@ const getData = async () => {
 }
 
 export default async function Index() {
+  'use cache';
+
   return (
     <div className="py-6">
       <h1 className="text-3xl font-bold tracking-tight mb-8">
