@@ -5,6 +5,7 @@ import NavBar from "../components/general/NavBar";
 import { AuthProvider } from "../components/general/AuthProvider";
 import ReactQueryProvider from "@/plugins/ReactQuery";
 import { Suspense } from "react";
+import { Analytics } from "@vercel/analytics/react"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         >
           <ReactQueryProvider>
             <Suspense fallback={<div>Loading...</div>}>
+              <Analytics />
               <NavBar />
               {children}
             </Suspense>
