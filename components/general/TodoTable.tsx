@@ -7,9 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogFooter, DialogHeader } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { Suspense, useState, useCallback, useMemo } from "react";
+import React, { Suspense, useState, useCallback, useMemo } from "react";
 import { useFetchTodos } from "@/store/todo.store";
 import { MoreHorizontal, Plus } from "lucide-react";
 
@@ -35,8 +34,9 @@ export default function TodoTable({ userId }: Props) {
     const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
     const [isStatusDialogOpen, setIsStatusDialogOpen] = useState(false);
 
+
     const { data, isLoading, fetchNextPage, hasNextPage, isFetchingNextPage } = useFetchTodos(userId, status);
-    console.log('data :>> ', data);
+
     const loading = useMemo(() => isLoading || isFetchingNextPage, [isLoading, isFetchingNextPage]);
     const todos = useMemo(() => data?.pages.flatMap((page) => page.todos) || [], [data]);
 
@@ -49,14 +49,20 @@ export default function TodoTable({ userId }: Props) {
         setIsStatusDialogOpen(true);
     }, []);
 
-    const updateTodoStatus = useCallback(async (id: string, newStatus: StatusType) => {
+    const updateTodoStatus = useCallback((id: string, newStatus: StatusType) => {
         try {
-            await handleEditStatus(id, newStatus);
+            setSelectedTodo(null);
+            handleEditStatus(id, newStatus)
+            todos.forEach((todo: any) => {
+                if (todo.id === id) {
+                    todo.status = newStatus;
+                }
+            });
             setIsStatusDialogOpen(false);
         } catch (error) {
             console.error('Failed to update todo status:', error);
         }
-    }, []);
+    }, [todos]);
 
     const loadMore = useCallback(() => {
         if (hasNextPage && !isFetchingNextPage) {
