@@ -5,9 +5,9 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
+import { CustomSelect, CustomSelectItem } from './CustomSelect';
 
 const QRGenerator = () => {
     const [text, setText] = useState('https://example.com');
@@ -15,7 +15,7 @@ const QRGenerator = () => {
     const [bgColor, setBgColor] = useState('#FFFFFF');
     const [fgColor, setFgColor] = useState('#000000');
     const [includeMargin, setIncludeMargin] = useState(true);
-    const [level, setLevel] = useState('L');
+    const [level, setLevel] = useState<any>('L');
     const qrRef = useRef(null);
 
     const downloadQR = () => {
@@ -35,7 +35,7 @@ const QRGenerator = () => {
     };
 
     return (
-        <Card className="w-full max-w-md mx-auto">
+        <Card className="w-full max-w-md mx-auto overflow-hidden shadow-lg">
             <CardHeader>
                 <CardTitle>QR Code Generator</CardTitle>
             </CardHeader>
@@ -60,74 +60,85 @@ const QRGenerator = () => {
                         max={512}
                         step={8}
                         value={[size]}
-                        onValueChange={(value: any) => setSize(value[0])}
+                        onValueChange={(value) => setSize(value[0])}
                     />
                 </div>
 
-                <div className="space-y-2">
-                    <Label htmlFor="level">Error Correction Level</Label>
-                    <Select value={level} onValueChange={setLevel}>
-                        <SelectTrigger id="level">
-                            <SelectValue placeholder="Select level" />
-                        </SelectTrigger>
-                        <SelectContent>
-                            <SelectItem value="L">Low (7%)</SelectItem>
-                            <SelectItem value="M">Medium (15%)</SelectItem>
-                            <SelectItem value="Q">Quartile (25%)</SelectItem>
-                            <SelectItem value="H">High (30%)</SelectItem>
-                        </SelectContent>
-                    </Select>
-                </div>
+                {/* Form controls with fixed height container */}
+                <div style={{ minHeight: '240px' }}>
+                    <div className="space-y-2 relative">
+                        <Label htmlFor="level">Error Correction Level</Label>
+                        <CustomSelect
+                            id="level"
+                            value={level}
+                            onValueChange={setLevel}
+                            className="w-[180px]"
+                        >
+                            <CustomSelectItem value="L">Low (7%)</CustomSelectItem>
+                            <CustomSelectItem value="M">Medium (15%)</CustomSelectItem>
+                            <CustomSelectItem value="Q">Quartile (25%)</CustomSelectItem>
+                            <CustomSelectItem value="H">High (30%)</CustomSelectItem>
+                        </CustomSelect>
+                    </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                        <Label htmlFor="fgColor">Foreground Color</Label>
-                        <div className="flex items-center gap-2">
-                            <Input
-                                type="color"
-                                id="fgColor"
-                                value={fgColor}
-                                onChange={(e) => setFgColor(e.target.value)}
-                                className="w-12 h-8 p-1"
-                            />
-                            <Input
-                                value={fgColor}
-                                onChange={(e) => setFgColor(e.target.value)}
-                                className="flex-1"
-                            />
+                    <div className="grid grid-cols-2 gap-4 mt-4">
+                        <div className="space-y-2">
+                            <Label htmlFor="fgColor">Foreground Color</Label>
+                            <div className="flex items-center gap-2">
+                                <Input
+                                    type="color"
+                                    id="fgColor"
+                                    value={fgColor}
+                                    onChange={(e) => setFgColor(e.target.value)}
+                                    className="w-12 h-8 p-1"
+                                />
+                                <Input
+                                    value={fgColor}
+                                    onChange={(e) => setFgColor(e.target.value)}
+                                    className="flex-1"
+                                />
+                            </div>
+                        </div>
+
+                        <div className="space-y-2">
+                            <Label htmlFor="bgColor">Background Color</Label>
+                            <div className="flex items-center gap-2">
+                                <Input
+                                    type="color"
+                                    id="bgColor"
+                                    value={bgColor}
+                                    onChange={(e) => setBgColor(e.target.value)}
+                                    className="w-12 h-8 p-1"
+                                />
+                                <Input
+                                    value={bgColor}
+                                    onChange={(e) => setBgColor(e.target.value)}
+                                    className="flex-1"
+                                />
+                            </div>
                         </div>
                     </div>
 
-                    <div className="space-y-2">
-                        <Label htmlFor="bgColor">Background Color</Label>
-                        <div className="flex items-center gap-2">
-                            <Input
-                                type="color"
-                                id="bgColor"
-                                value={bgColor}
-                                onChange={(e) => setBgColor(e.target.value)}
-                                className="w-12 h-8 p-1"
-                            />
-                            <Input
-                                value={bgColor}
-                                onChange={(e) => setBgColor(e.target.value)}
-                                className="flex-1"
-                            />
-                        </div>
+                    <div className="flex items-center space-x-2 mt-4">
+                        <Switch
+                            id="includeMargin"
+                            checked={includeMargin}
+                            onCheckedChange={setIncludeMargin}
+                        />
+                        <Label htmlFor="includeMargin">Include Margin</Label>
                     </div>
                 </div>
 
-                <div className="flex items-center space-x-2">
-                    <Switch
-                        id="includeMargin"
-                        checked={includeMargin}
-                        onCheckedChange={setIncludeMargin}
-                    />
-                    <Label htmlFor="includeMargin">Include Margin</Label>
-                </div>
-
-                <div className="flex justify-center py-4">
-                    <div className="bg-white p-2 rounded-lg border">
+                {/* Fixed size container for QR code */}
+                <div className="flex justify-center mt-4">
+                    <div
+                        className="bg-white p-2 rounded-lg border flex items-center justify-center"
+                        style={{
+                            height: size + 16,
+                            width: size + 16,
+                            margin: '0 auto'
+                        }}
+                    >
                         <QRCodeCanvas
                             id="qr-code"
                             value={text || "https://example.com"}
@@ -135,13 +146,14 @@ const QRGenerator = () => {
                             bgColor={bgColor}
                             fgColor={fgColor}
                             includeMargin={includeMargin}
+                            level={level}
                             ref={qrRef}
                         />
                     </div>
                 </div>
             </CardContent>
             <CardFooter>
-                <Button onClick={downloadQR} className="w-full">
+                <Button onClick={downloadQR} className="w-full download-btn">
                     Download QR Code
                 </Button>
             </CardFooter>

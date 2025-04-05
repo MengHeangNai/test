@@ -35,7 +35,7 @@ export default function RootLayout({
         >
           <ReactQueryProvider>
             <Suspense fallback={<div>Loading...</div>}>
-              <Analytics />
+              {/* <Analytics /> */}
               <NavBar />
               {children}
             </Suspense>

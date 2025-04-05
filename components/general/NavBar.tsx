@@ -30,7 +30,7 @@ function NavBar() {
                     <Link href={'/todo'} className='text-sm font-medium hover:text-blue-500 transition-colors'>Todos</Link>
                 </div>
                 <div className='hidden sm:flex items-center gap-6'>
-                    <Link href={'/next'} className='text-sm font-medium hover:text-blue-500 transition-colors'>My Learning</Link>
+                    <Link href={'/my-leaning'} className='text-sm font-medium hover:text-blue-500 transition-colors'>My Learning</Link>
                 </div>
             </div>
             {
