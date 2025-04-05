@@ -10,6 +10,7 @@ import { Separator } from '@/components/ui/separator'
 
 
 function TicTacToePage() {
+
     const history = useTicTacToeStore((state: any) => state.history)
     const setHistory = useTicTacToeStore((state: any) => state.setHistory)
     const currentMove = useTicTacToeStore((state: any) => state.currentMove)

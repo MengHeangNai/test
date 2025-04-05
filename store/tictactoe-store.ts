@@ -12,7 +12,7 @@ export const useTicTacToeStore = create(
             setCurrentMove: (currentMove: any) => set({ currentMove }),
             scores: { x: 0, o: 0, ties: 0 },
             setScores: (scores: any) => set({ scores }),
-            resetScores: () => set({ scores: { x: 0, O: 0, ties: 0 } }),
+            resetScores: () => set({ scores: { x: 0, o: 0, ties: 0 } }),
         }),
         {
             name: 'tictactoe-storage', // unique name
