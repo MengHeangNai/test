@@ -34,6 +34,24 @@ export default function MyLeaningPage() {
                 </Link>
             </div>
 
+            <div className="flex flex-col gap-4 border-2 border-dashed border-gray-300 p-4 rounded-lg bg-gray-50 mb-4">
+                <Link href={'/my-leaning/word-search-game'} className="text-sm font-medium hover:text-blue-500 transition-colors">
+                    Word Search with Zustand
+                </Link>
+            </div>
+
+            <div className="flex flex-col gap-4 border-2 border-dashed border-gray-300 p-4 rounded-lg bg-gray-50 mb-4">
+                <Link href={'/my-leaning/memory-game'} className="text-sm font-medium hover:text-blue-500 transition-colors">
+                    Memory Game with Zustand
+                </Link>
+            </div>
+
+            <div className="flex flex-col gap-4 border-2 border-dashed border-gray-300 p-4 rounded-lg bg-gray-50 mb-4">
+                <Link href={'/my-leaning/sudoku-game'} className="text-sm font-medium hover:text-blue-500 transition-colors">
+                    Sudoku Game with Zustand
+                </Link>
+            </div>
+
         </div>
     )
 }
