@@ -5,34 +5,9 @@ import type { NextRequest } from 'next/server';
 export default withAuth(
     async function middleware(req: any) { },
     {
-        publicPaths: ["/"],
+        publicPaths: ["/", "/post/*", "/api/posts", "/api/image-proxy"],
     }
 );
-
-export function middleware(request: NextRequest) {
-    const path = request.nextUrl.pathname;
-
-    const publicPaths = [
-        '/',
-        '/post/*',
-    ];
-
-    const isPublicPath = publicPaths.some(publicPath =>
-        path.startsWith(publicPath)
-    );
-
-    if (isPublicPath) {
-        return NextResponse.next();
-    }
-
-    const token = request.cookies.get('auth-token')?.value || '';
-
-    if (!token && !isPublicPath) {
-        return new NextResponse('Unauthorized', { status: 401 });
-    }
-
-    return NextResponse.next();
-}
 
 export const config = {
     matcher: [
