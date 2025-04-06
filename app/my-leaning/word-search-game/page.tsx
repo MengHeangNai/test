@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Timer } from "lucide-react";
 import { CustomSelect, CustomSelectItem } from "@/components/general/CustomSelect";
+import { generateWordLists } from "@/app/utils/word";
 
 const GRID_SIZE = 10;
 const WORD_DIRECTIONS = ["horizontal", "vertical", "diagonal"];
@@ -33,12 +34,7 @@ const WordSearchGame = () => {
     const [gameActive, setGameActive] = useState<boolean>(false);
     const [gameWon, setGameWon] = useState<boolean>(false);
 
-    // Sample word lists by difficulty
-    const wordLists = {
-        easy: ["CAT", "DOG", "SUN", "FUN", "HAT", "RUN"],
-        medium: ["APPLE", "BEACH", "CLOUD", "DREAM", "EARTH", "FRUIT"],
-        hard: ["PROGRAM", "NEXTJS", "PUZZLE", "TYPESCRIPT", "SHADOW", "COMPONENT"]
-    };
+    const wordLists = generateWordLists(6, 6, 6);
 
     useEffect(() => {
         if (gameActive && !gameWon) {
