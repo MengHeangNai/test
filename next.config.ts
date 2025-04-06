@@ -1,37 +1,51 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   reactStrictMode: true,
   images: {
     dangerouslyAllowSVG: true,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-  // images: {
-  //   remotePatterns: [
-  //     {
-  //       hostname: 'i.pravatar.cc',
-  //       protocol: 'https',
-  //       port: ''
-  //     },
-  //     {
-  //       hostname: 'lh3.googleusercontent.com',
-  //       protocol: 'https',
-  //       port: ''
-  //     }, {
-  //       hostname: 'www.gstatic.com',
-  //       protocol: 'https',
-  //       port: ''
-  //     },
-  //     {
-  //       hostname: 'f.woowoowoowoo.net',
-  //       protocol: 'https',
-  //       port: ''
-  //     }
-  //   ]
-  // },
   experimental: {
     useCache: true,
+  },
+  async headers() {
+    return [
+      {
+        source: "/api/image-proxy",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "X-CSRF-Token, X-Requested-With",
+          },
+        ],
+      },
+      {
+        source: "/api/posts",
+        headers: [
+          {
+            key: "Access-Control-Allow-Origin",
+            value: "*",
+          },
+          {
+            key: "Access-Control-Allow-Methods",
+            value: "GET,OPTIONS",
+          },
+          {
+            key: "Access-Control-Allow-Headers",
+            value: "X-CSRF-Token, X-Requested-With",
+          },
+        ]
+      }
+    ];
   }
 };
 

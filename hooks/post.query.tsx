@@ -20,15 +20,15 @@ export const useFetchPostById = (id: string) => {
 
 export const useFetchPost = () => {
     return useQuery({
-        queryKey: ["useFetchPost"],
+        queryKey: ["useFetchPost", "all"],
         queryFn: async () => {
             const response = await axios.get(`/api/posts`);
 
-            if (!response) {
+            if (!response || !response.data) {
                 throw new Error("Failed to fetch post");
             }
 
-            return response.data.post;
+            return response.data.post || [];
         },
     });
 };

@@ -11,18 +11,12 @@ export async function GET(request: NextRequest) {
         let post = null;
 
         if (id) {
-            if (!id) {
-                return NextResponse.json({ error: "ID parameter is required" }, { status: 400 });
-            }
             post = await prisma.blogPost.findUnique({
                 where: {
                     id: id as string,
                 },
             });
         } else if (userId) {
-            if (!userId) {
-                return NextResponse.json({ error: "User ID parameter is required" }, { status: 400 });
-            }
             post = await prisma.blogPost.findMany({
                 where: {
                     authorId: userId as string,
@@ -42,8 +36,7 @@ export async function GET(request: NextRequest) {
                     createdAt: 'desc'
                 },
             });
-        }
-        else {
+        } else {
             post = await prisma.blogPost.findMany({
                 select: {
                     title: true,
@@ -63,14 +56,19 @@ export async function GET(request: NextRequest) {
         }
 
         if (!post) {
-            return NextResponse.json({ error: "Post not found" }, { status: 404 });
+            return NextResponse.json({ post: [] }, {
+                headers: {
+                    'Cache-Control': 'public, s-max-age=3600, stale-while-revalidate=86400',
+                    'Content-Type': 'application/json',
+                }
+            });
         }
 
         return NextResponse.json({
             post,
         }, {
             headers: {
-                'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+                'Cache-Control': 'public, s-max-age=3600, stale-while-revalidate=86400',
                 'Content-Type': 'application/json',
             }
         });
@@ -78,4 +76,14 @@ export async function GET(request: NextRequest) {
         console.error("Post fetch error:", error);
         return NextResponse.json({ error: "Failed to fetch post" }, { status: 500 });
     }
+}
+
+export async function OPTIONS() {
+    return NextResponse.json({}, {
+        headers: {
+            "Access-Control-Allow-Origin": "*",
+            "Access-Control-Allow-Methods": "GET,OPTIONS,PATCH,DELETE,POST,PUT",
+            "Access-Control-Allow-Headers": "X-CSRF-Token, X-Requested-With, Content-Type, Authorization",
+        },
+    });
 }

@@ -2,13 +2,14 @@
 import { useFetchPost } from "@/hooks/post.query"
 import BlogPostCard from "./BlogPostCard"
 import React from "react"
+import { BlogPostsGrid } from "./BlogPostsGrid";
 
 export function BlogPost() {
 
     const { data: posts } = useFetchPost();
 
     if (!posts) {
-        return <div>Loading...</div>;
+        return <BlogPostsGrid />
     }
 
     return (
