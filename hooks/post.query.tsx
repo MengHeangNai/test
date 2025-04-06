@@ -1,16 +1,18 @@
 "use client"
 
+import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 export const useFetchPostById = (id: string) => {
     return useQuery({
         queryKey: ["useFetchPostById", id],
         queryFn: async () => {
-            const response = await fetch(`/api/posts/${id}`);
-            if (!response.ok) {
+            const response = await axios.get(`/api/posts/?id=${id}`);
+
+            if (!response) {
                 throw new Error("Failed to fetch post");
             }
-            return response.json();
+            return response.data.post;
         },
     });
 };
@@ -20,12 +22,13 @@ export const useFetchPost = () => {
     return useQuery({
         queryKey: ["useFetchPost"],
         queryFn: async () => {
-            const response = await fetch(`/api/posts`);
-            if (!response.ok) {
+            const response = await axios.get(`/api/posts`);
+
+            if (!response) {
                 throw new Error("Failed to fetch post");
             }
 
-            return response.json();
+            return response.data.post;
         },
     });
 };

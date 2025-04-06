@@ -8,10 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 function PostItem({ id }: { id: string }) {
-    const { data: postData, isLoading } = useFetchPostById(id);
-
-    const data = postData
-    console.log('data :>> ', data);
+    const { data, isLoading } = useFetchPostById(id);
 
     if (isLoading) {
         return <div className='flex justify-center items-center h-screen'>Loading...</div>
@@ -43,7 +40,14 @@ function PostItem({ id }: { id: string }) {
             </div>
 
             <div className='relative h-[400px] w-full mb-8 overflow-hidden rounded-lg'>
-                <Image src={`/api/image-proxy?url=${encodeURIComponent(data.imageUrl)}` || data.imageUrl} alt={data.title} fill className='object-cover' />
+                <Image
+                    src={`/api/image-proxy?url=${encodeURIComponent(data.imageUrl)}` || data.imageUrl}
+                    alt={data.title}
+                    fill
+                    className='object-cover'
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    priority
+                />
             </div>
 
             <Card>

@@ -1,26 +1,35 @@
-import { NextResponse } from 'next/server';
+// app/api/image-proxy/route.ts
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: Request) {
-    const { searchParams } = new URL(request.url);
-    const url = searchParams.get('url'); // should be `url` not `imageUrl`
+export async function GET(request: NextRequest) {
+    const url = request.nextUrl.searchParams.get("url");
 
     if (!url) {
-        return NextResponse.json({ error: 'Missing "url" query parameter' }, { status: 400 });
+        return NextResponse.json({ error: "URL parameter is required" }, { status: 400 });
     }
 
-    const response = await fetch(url);
+    try {
+        const imageResponse = await fetch(url);
 
-    const contentType = response.headers.get('content-type') || '';
+        if (!imageResponse.ok) {
+            return NextResponse.json({ error: "Failed to fetch image" }, { status: imageResponse.status });
+        }
 
-    if (!contentType.startsWith('image/')) {
-        return NextResponse.json({ error: 'The requested resource is not an image' }, { status: 400 });
+        // Get the image data as an array buffer
+        const imageData = await imageResponse.arrayBuffer();
+
+        // Get the content type from the original response
+        const contentType = imageResponse.headers.get("content-type") || "image/*";
+
+        // Create a new response with the image data and appropriate headers
+        return new NextResponse(imageData, {
+            headers: {
+                "Content-Type": contentType,
+                "Cache-Control": "public, max-age=86400" // Cache for 1 day
+            }
+        });
+    } catch (error) {
+        console.error("Image proxy error:", error);
+        return NextResponse.json({ error: "Failed to proxy image" }, { status: 500 });
     }
-
-    const buffer = await response.arrayBuffer();
-
-    return new NextResponse(Buffer.from(buffer), {
-        headers: {
-            'Content-Type': contentType,
-        },
-    });
 }

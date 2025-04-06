@@ -1,25 +1,43 @@
 // app/api/posts/[id]/route.ts
 import { prisma } from "@/app/utils/db";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export async function GET() {
+export async function GET(request: NextRequest) {
     try {
-        const post = await prisma.blogPost.findMany({
-            select: {
-                title: true,
-                content: true,
-                imageUrl: true,
-                authorImage: true,
-                authorName: true,
-                id: true,
-                createdAt: true,
-                authorId: true,
-                updatedAt: true
-            },
-            orderBy: {
-                createdAt: 'desc'
-            },
-        });
+        const searchParams = request.nextUrl.searchParams;
+        const id = searchParams.get('id');
+        let post = null;
+
+
+
+        if (id) {
+            if (!id) {
+                return NextResponse.json({ error: "ID parameter is required" }, { status: 400 });
+            }
+            post = await prisma.blogPost.findUnique({
+                where: {
+                    id: id as string,
+                },
+            });
+        }
+        else {
+            post = await prisma.blogPost.findMany({
+                select: {
+                    title: true,
+                    content: true,
+                    imageUrl: true,
+                    authorImage: true,
+                    authorName: true,
+                    id: true,
+                    createdAt: true,
+                    authorId: true,
+                    updatedAt: true
+                },
+                orderBy: {
+                    createdAt: 'desc'
+                },
+            });
+        }
 
         if (!post) {
             return NextResponse.json({ error: "Post not found" }, { status: 404 });
