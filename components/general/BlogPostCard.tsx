@@ -23,7 +23,7 @@ function BlogPostCard({ data }: BlogPostCardProps) {
 
                 <div className='relative h-48 w-full overflow-hidden'>
                     <Image
-                        src={data.imageUrl}
+                        src={`/api/image-proxy?url=${encodeURIComponent(data.imageUrl)}` || data.imageUrl}
                         alt={data.title}
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -40,7 +40,7 @@ function BlogPostCard({ data }: BlogPostCardProps) {
 
                         <div className='flex items-center space-x-2'>
                             <div className='relative size-8 overflow-hidden rounded-full'>
-                                <Image sizes='(max-width: 768px) 100vw, 48px' src={data.authorImage} alt={data.authorName} fill className='object-contain' />
+                                <Image sizes='(max-width: 768px) 100vw, 48px' src={`/api/image-proxy?url=${encodeURIComponent(data.authorImage)}` || data.authorImage} alt={data.authorName} fill className='object-contain' />
                                 <p className='text-sm font-medium text-gray-700'>{data.authorName}</p>
                             </div>
                         </div>

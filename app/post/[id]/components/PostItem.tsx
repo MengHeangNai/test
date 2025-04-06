@@ -26,7 +26,7 @@ function PostItem({ id }: { id: string }) {
                 <div className='flex items-center space-x-4'>
                     <div className='flex items-center space-x-2'>
                         <div className='relative size-10 overflow-hidden rounded-full'>
-                            <Image src={data.authorImage} alt={data.authorName} fill sizes="(max-width: 768px) 100vw, 48px" className='object-cover' />
+                            <Image src={`/api/image-proxy?url=${encodeURIComponent(data.authorImage)}` || data.authorImage} alt={data.authorName} fill sizes="(max-width: 768px) 100vw, 48px" className='object-cover' />
                         </div>
                         <p className=' font-medium  '>{data.authorName}</p>
                     </div>
@@ -43,7 +43,7 @@ function PostItem({ id }: { id: string }) {
             </div>
 
             <div className='relative h-[400px] w-full mb-8 overflow-hidden rounded-lg'>
-                <Image src={data.imageUrl} alt={data.title} fill className='object-cover' />
+                <Image src={`/api/image-proxy?url=${encodeURIComponent(data.imageUrl)}` || data.imageUrl} alt={data.title} fill className='object-cover' />
             </div>
 
             <Card>
