@@ -13,7 +13,8 @@ export function middleware(request: NextRequest) {
     const path = request.nextUrl.pathname;
 
     const publicPaths = [
-        '/'  // Add other public API routes if needed
+        '/',
+        '/post/*',
     ];
 
     const isPublicPath = publicPaths.some(publicPath =>
