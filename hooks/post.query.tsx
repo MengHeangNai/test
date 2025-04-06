@@ -32,3 +32,19 @@ export const useFetchPost = () => {
         },
     });
 };
+
+export const useFetchPostByUserId = (userId: any) => {
+    return useQuery({
+        queryKey: ["useFetchPost", userId],
+        queryFn: async () => {
+            const response = await axios.get(`/api/posts/?userId=${userId}`);
+
+            if (!response) {
+                throw new Error("Failed to fetch post");
+            }
+
+            return response.data.post;
+        },
+    });
+};
+

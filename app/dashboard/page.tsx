@@ -1,38 +1,12 @@
 import { buttonVariants } from "@/components/ui/button";
 import Link from "next/link";
-import { prisma } from "../utils/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import BlogPostCard from "../../components/general/BlogPostCard";
-
-async function getData(userId: any) {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  const data = await prisma.blogPost.findMany({
-    where: {
-      authorId: userId
-    },
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      imageUrl: true,
-      authorId: true,
-      authorName: true,
-      authorImage: true,
-      createdAt: true,
-      updatedAt: true,
-    },
-    orderBy: {
-      createdAt: 'desc'
-    },
-  });
-  return data;
-}
+import BlogItem from "./conponeents/BlogItem";
 
 
 export default async function Dashboard() {
   const { getUser } = getKindeServerSession();
   const user = await getUser();
-  const data = await getData(user?.id);
 
   return (
     <div>
@@ -40,11 +14,7 @@ export default async function Dashboard() {
         <h2>Your blog Articles </h2>
         <Link className={buttonVariants()} href={'/dashboard/create'}>Create Post</Link>
       </div>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {data.map((post: any) => (
-          <BlogPostCard data={post} key={post?.id} />
-        ))}
-      </div>
+      <BlogItem userId={user?.id} />
     </div>
   );
 }

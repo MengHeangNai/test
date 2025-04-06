@@ -6,27 +6,6 @@ import { BlogPost } from "@/components/general/BlogPost";
 
 export const revalidate = 60;
 
-const getData = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-  const data = await prisma.blogPost.findMany({
-    select: {
-      title: true,
-      content: true,
-      imageUrl: true,
-      authorImage: true,
-      authorName: true,
-      id: true,
-      createdAt: true,
-      authorId: true,
-      updatedAt: true
-    },
-    orderBy: {
-      createdAt: 'desc'
-    },
-  });
-  return data
-}
-
 export default async function Index() {
 
   return (

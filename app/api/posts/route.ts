@@ -6,9 +6,9 @@ export async function GET(request: NextRequest) {
     try {
         const searchParams = request.nextUrl.searchParams;
         const id = searchParams.get('id');
+        const userId = searchParams.get('userId');
+
         let post = null;
-
-
 
         if (id) {
             if (!id) {
@@ -17,6 +17,29 @@ export async function GET(request: NextRequest) {
             post = await prisma.blogPost.findUnique({
                 where: {
                     id: id as string,
+                },
+            });
+        } else if (userId) {
+            if (!userId) {
+                return NextResponse.json({ error: "User ID parameter is required" }, { status: 400 });
+            }
+            post = await prisma.blogPost.findMany({
+                where: {
+                    authorId: userId as string,
+                },
+                select: {
+                    title: true,
+                    content: true,
+                    imageUrl: true,
+                    authorImage: true,
+                    authorName: true,
+                    id: true,
+                    createdAt: true,
+                    authorId: true,
+                    updatedAt: true
+                },
+                orderBy: {
+                    createdAt: 'desc'
                 },
             });
         }
