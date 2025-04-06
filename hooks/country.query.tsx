@@ -20,7 +20,7 @@ export const useFetchCountry = () => {
 
 export const useFetchCountryByName = (countryName: any) => {
     return useQuery({
-        queryKey: ["useFetchCountryByName"],
+        queryKey: ["useFetchCountryByName", countryName],
         queryFn: async () => {
             const response = await axios.get(
                 `https://restcountries.com/v3.1/name/${countryName}?fullText=true`

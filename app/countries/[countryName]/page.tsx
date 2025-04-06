@@ -1,6 +1,7 @@
 'use client';
 
 import { useFetchCountryByName } from "@/hooks/country.query";
+import Image from 'next/image';
 import React, { useEffect, useState } from "react";
 import { use } from "react";
 
@@ -16,7 +17,7 @@ export default function Country({ params }: { params: Promise<Params> }) {
         if (data) {
             setLoaderData(data);
         }
-    }, [data]);
+    }, [data, countryName]);
 
     const country = {
         name: loaderData[0]?.name?.common || "N/A",
@@ -59,10 +60,12 @@ export default function Country({ params }: { params: Promise<Params> }) {
             </div>
             {country.flagUrl && (
                 <div className="flex justify-center items-center">
-                    <img
-                        src={country.flagUrl}
-                        className="w-56 h-auto border rounded shadow-lg"
-                    />
+                    <Image
+                        src={`/api/image-proxy?url=${encodeURIComponent(country.flagUrl)}`}
+                        className=" border rounded shadow-lg"
+                        width={350}
+                        height={350}
+                        alt={country.name} />
                 </div>
             )}
         </div>
