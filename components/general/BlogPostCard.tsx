@@ -22,8 +22,13 @@ function BlogPostCard({ data }: BlogPostCardProps) {
             <Link href={`/post/${data.id}`} className='block w-full h-full'>
 
                 <div className='relative h-48 w-full overflow-hidden'>
-                    <Image src={data.imageUrl} alt={data.title} fill
+                    <Image
+                        src={data.imageUrl}
+                        alt={data.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className='object-cover transition-transform duration-300 group-hover:scale-105'
+                        priority
                     />
                 </div>
 
@@ -35,17 +40,17 @@ function BlogPostCard({ data }: BlogPostCardProps) {
 
                         <div className='flex items-center space-x-2'>
                             <div className='relative size-8 overflow-hidden rounded-full'>
-                                <Image src={data.authorImage} alt={data.authorName} fill className='object-contain' />
+                                <Image sizes='(max-width: 768px) 100vw, 48px' src={data.authorImage} alt={data.authorName} fill className='object-contain' />
                                 <p className='text-sm font-medium text-gray-700'>{data.authorName}</p>
                             </div>
                         </div>
 
                         <time className='text-xs text-gray-500'>
-                            {new Intl.DateTimeFormat('en-US', {
+                            {data.createdAt ? new Intl.DateTimeFormat('en-US', {
                                 year: 'numeric',
                                 month: 'long',
-                                day: '2-digit'
-                            }).format(data.createdAt)}
+                                day: '2-digit',
+                            }).format(new Date(data.createdAt)) : 'Invalid date'}
                         </time>
                     </div>
                 </div>

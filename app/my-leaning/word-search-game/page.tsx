@@ -6,13 +6,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue
-} from "@/components/ui/select";
 import { Timer } from "lucide-react";
 import { CustomSelect, CustomSelectItem } from "@/components/general/CustomSelect";
 
@@ -322,6 +315,7 @@ const WordSearchGame = () => {
                     <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                         <div className="flex items-center gap-2">
                             <CustomSelect
+                                className="w-32"
                                 value={difficulty}
                                 onValueChange={(value) => setDifficulty(value)}
                             >

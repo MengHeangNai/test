@@ -47,7 +47,7 @@ function NavBar() {
             </div>
             {user ? (
                 <div className='flex gap-6 items-center'>
-                    <p className='text-sm font-medium'>{user.name}</p>
+                    <p className='text-sm font-medium'>{user.family_name} {user.given_name}</p>
                     <LogoutLink
                         onClick={() => {
                             hashStorage.clear()

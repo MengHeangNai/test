@@ -10,6 +10,17 @@ async function getData(userId: any) {
     where: {
       authorId: userId
     },
+    select: {
+      id: true,
+      title: true,
+      content: true,
+      imageUrl: true,
+      authorId: true,
+      authorName: true,
+      authorImage: true,
+      createdAt: true,
+      updatedAt: true,
+    },
     orderBy: {
       createdAt: 'desc'
     },
@@ -19,9 +30,7 @@ async function getData(userId: any) {
 
 
 export default async function Dashboard() {
-  'use cache';
-
-  const { getUser, getIdToken, getAccessToken } = getKindeServerSession();
+  const { getUser } = getKindeServerSession();
   const user = await getUser();
   const data = await getData(user?.id);
 

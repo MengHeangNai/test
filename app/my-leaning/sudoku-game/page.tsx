@@ -30,6 +30,7 @@ import {
     Check,
     AlertTriangle
 } from "lucide-react";
+import { CustomSelect, CustomSelectItem } from "@/components/general/CustomSelect";
 
 type Cell = {
     value: number | null;
@@ -599,20 +600,15 @@ const SudokuGame = () => {
                 <CardContent>
                     <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
                         <div className="flex items-center gap-2">
-                            <Select
+                            <CustomSelect
                                 value={difficulty}
-                                onValueChange={(value: Difficulty) => setDifficulty(value)}
-                                disabled={gameStarted && !gameCompleted}
+                                className="w-32"
+                                onValueChange={(value: any) => setDifficulty(value)}
                             >
-                                <SelectTrigger className="w-32">
-                                    <SelectValue placeholder="Difficulty" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="easy">Easy</SelectItem>
-                                    <SelectItem value="medium">Medium</SelectItem>
-                                    <SelectItem value="hard">Hard</SelectItem>
-                                </SelectContent>
-                            </Select>
+                                <CustomSelectItem value="easy">Easy</CustomSelectItem>
+                                <CustomSelectItem value="medium">Medium</CustomSelectItem>
+                                <CustomSelectItem value="hard">Hard</CustomSelectItem>
+                            </CustomSelect>
                             <Button onClick={generateSudoku}>
                                 {gameStarted ? "New Game" : "Start Game"}
                             </Button>

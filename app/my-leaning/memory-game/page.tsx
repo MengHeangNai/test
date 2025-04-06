@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardFooter } from "@/componen
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Trophy, Heart, Star, Moon, Sun, Cloud, Smile, Music, Camera, Zap, Laptop, Coffee } from "lucide-react";
+import { CustomSelect, CustomSelectItem } from "@/components/general/CustomSelect";
 
 type CardType = {
     id: number;
@@ -175,20 +176,15 @@ const MemoryGame = () => {
                 <CardContent className="flex flex-col items-center">
                     <div className="flex flex-col md:flex-row justify-between items-center w-full mb-8 gap-4">
                         <div className="flex items-center gap-2">
-                            <Select
+                            <CustomSelect
                                 value={difficulty}
-                                onValueChange={(value: DifficultyType) => setDifficulty(value)}
-                                disabled={gameStarted}
+                                className="w-32"
+                                onValueChange={(value: any) => setDifficulty(value)}
                             >
-                                <SelectTrigger className="w-32">
-                                    <SelectValue placeholder="Difficulty" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                    <SelectItem value="easy">Easy</SelectItem>
-                                    <SelectItem value="medium">Medium</SelectItem>
-                                    <SelectItem value="hard">Hard</SelectItem>
-                                </SelectContent>
-                            </Select>
+                                <CustomSelectItem value="easy">Easy</CustomSelectItem>
+                                <CustomSelectItem value="medium">Medium</CustomSelectItem>
+                                <CustomSelectItem value="hard">Hard</CustomSelectItem>
+                            </CustomSelect>
                             <Button onClick={initializeGame}>
                                 {gameStarted ? "Restart" : "Start Game"}
                             </Button>

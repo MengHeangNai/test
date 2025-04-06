@@ -1,12 +1,13 @@
 // PassportMRZGenerator.tsx
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { useFetchCountries } from '@/store/country.store';
 
 interface PassportData {
     documentType: string;
@@ -47,22 +48,12 @@ const PassportMRZGenerator = () => {
 
     const [mrzCode, setMrzCode] = useState<string>('');
     const [selectedDocType, setSelectedDocType] = useState<string>("Passport(TD3)");
-    const [countries, setCountries] = useState<Country[]>([]);
 
-    // Fetch countries data
-    useEffect(() => {
-        const fetchCountries = async () => {
-            try {
-                const response = await fetch('https://restcountries.com/v3.1/all');
-                const data = await response.json();
-                setCountries(data);
-            } catch (error) {
-                console.error('Error fetching countries:', error);
-            }
-        };
+    const { data } = useFetchCountries();
 
-        fetchCountries();
-    }, []);
+    const countries = useMemo(() => {
+        return data?.pages.flatMap((page: any) => page.countries) || [];
+    }, [data]);
 
     // Generate MRZ code when passport data changes
     useEffect(() => {

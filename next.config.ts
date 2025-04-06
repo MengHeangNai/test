@@ -18,6 +18,11 @@ const nextConfig: NextConfig = {
         hostname: 'www.gstatic.com',
         protocol: 'https',
         port: ''
+      },
+      {
+        hostname: 'f.woowoowoowoo.net',
+        protocol: 'https',
+        port: ''
       }
     ]
   },

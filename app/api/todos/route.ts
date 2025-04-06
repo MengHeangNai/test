@@ -52,6 +52,11 @@ export async function GET(request: NextRequest) {
                 pageSize: limit,
                 pageCount: Math.ceil(totalCount / limit),
             }
+        }, {
+            headers: {
+                'Cache-Control': 'public, s-maxage=3600, stale-while-revalidate=86400',
+                'Content-Type': 'application/json',
+            }
         });
     } catch (error) {
         console.error('Failed to fetch todos:', error);
