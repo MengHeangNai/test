@@ -19,7 +19,7 @@ function NavBar() {
             { href: '/', label: 'Home' },
             { href: '/dashboard', label: 'Dashboard' },
             { href: '/my-leaning', label: 'My Learning' },
-            { href: '/home', label: 'Country' },
+            { href: '/country', label: 'Country' },
             { href: '/my-portfolio', label: 'My Portfolio' },
             { href: '/my-app', label: 'My App Build' },
         ]
@@ -27,7 +27,7 @@ function NavBar() {
             { href: '/', label: 'Home' },
             { href: '/dashboard', label: 'Dashboard' },
             { href: '/my-leaning', label: 'My Learning' },
-            { href: '/home', label: 'Country' },
+            { href: '/country', label: 'Country' },
         ]
 
     return (
